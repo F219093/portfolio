@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Contact Us</title>
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.wrapper {
+  margin: 1rem auto;
+  max-width: 500px;
+  padding: 1rem;
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+form {
+  margin: 1rem 0;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+input, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input[type="submit"] {
+  margin-top: 0.5rem;
+  background: #3671e2;
+  color: #fff;
+  padding: 0.5rem;
+  border: 0;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+<div class="wrapper">
+  <h1>Contact Us</h1>
+  <form id="contact-form">
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" required>
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required>
+    <label for="subject">Subject:</label>
+    <input type="text" name="subject" id="subject" required>
+    <label for="message">Message:</label>
+    <textarea name="message" id="message" required></textarea>
+    <input type="submit" value="Send">
+  </form>
+</div>
+
+<script>
+const form = document.querySelector('#contact-form');
+
+form.addEventListener('submit', event => {
+  event.preventDefault();
+
+  const data = new FormData(form);
+  const xhr = new XMLHttpRequest();
+
+  xhr.open(form.method, form.action);
+
+  xhr.setRequestHeader('Accept', 'application/json');
+
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState !== XMLHttpRequest.DONE) return;
+
+    if (xhr.status === 200) {
+      form.reset();
+    }
+  };
+
+  xhr.send(data);
+});
+</script>
+
+</body>
+</html>
